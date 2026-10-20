@@ -1230,7 +1230,7 @@ checkoutForm.addEventListener("submit", event => {
   if (paymentMethod === "cod") {
     finalizeOrder("Cash on Delivery (COD)");
   } else {
-    fetch("http://localhost:5000/api/create-bkash-payment", {
+    fetch("https://trendynest-hfw9.onrender.com/api/create-bkash-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: total })
