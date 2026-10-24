@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Stack E-Commerce Architect | World-Class Web Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #070913;
+            --bg-card: rgba(18, 24, 43, 0.7);
+            --bg-card-hover: rgba(28, 38, 66, 0.85);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(56, 189, 248, 0.3);
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.4);
+            --secondary: #818cf8;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --bkash-color: #e2136e;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(7, 9, 19, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Language Switcher Button */
+        .lang-switch {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-highlight);
+            color: var(--primary);
+            padding: 0.35rem 0.8rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition-smooth);
+        }
+
+        .lang-switch:hover { background: rgba(56, 189, 248, 0.15); }
+
+        .nav-right-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .btn-hire {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-hire:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--primary-glow);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.3rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Mobile Drawer */
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(12, 17, 31, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-glass);
+            z-index: 2000;
+            padding: 2rem;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-drawer.active { right: 0; }
+
+        .drawer-close {
+            align-self: flex-end;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .drawer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .drawer-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 580px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px var(--primary-glow);
+        }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Terminal Window */
+        .terminal-card {
+            background: rgba(10, 14, 26, 0.9);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .terminal-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .terminal-body {
+            padding: 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #a7f3d0;
+        }
+
+        .code-line { margin-bottom: 0.4rem; }
+        .code-keyword { color: #f472b6; }
+        .code-string { color: #38bdf8; }
+        .code-func { color: #818cf8; }
+
+        .terminal-output {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            min-height: 70px;
+        }
+
+        /* Section Global */
+        .section { padding: 5rem 0; }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-subtitle {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            transition: var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-highlight);
+            transform: translateY(-5px);
+        }
+
+        /* Skills Matrix */
+        .skills-filter {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-icon {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .progress-bg {
+            width: 100%;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            overflow: hidden;
+            margin-top: 0.8rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 50px;
+        }
+
+        /* Featured Projects Showcase */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-badge-top {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: var(--bkash-color);
+            color: #fff;
+            padding: 0.25rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin: 1.2rem 0;
+        }
+
+        .tag {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Project Cost Calculator */
+        .calculator-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .calc-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .calc-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .calc-select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(10, 14, 26, 0.8);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .calc-display {
+            background: rgba(10, 14, 26, 0.9);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0.8rem 0;
+        }
+
+        /* Modal Case Study */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .modal-container {
+            background: #0f1526;
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        /* Footer Styles */
+        .footer {
+            border-top: 1px solid var(--border-glass);
+            background: rgba(5, 7, 15, 0.95);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Responsive Breakpoints & Mobile Font Adjustments */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .calculator-box { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: flex; align-items: center; gap: 0.8rem; }
+            
+            /* Mobile Specific Font & Spacing Fixes */
+            .hero { padding: 7rem 0 3rem; min-height: auto; }
+            .hero-title { font-size: 2.2rem !important; line-height: 1.2; }
+            .hero-desc { font-size: 0.95rem; }
+            .section-title { font-size: 1.8rem !important; }
+            .section { padding: 4rem 0; }
+            .calculator-box { padding: 1.5rem; }
+            .price-tag { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo"><i class="fa-solid fa-code"></i> Dev<span>Portfolio</span></a>
+            
+            <!-- Desktop Nav Links -->
+            <ul class="nav-links">
+                <li><a href="#about" id="nav-about">About</a></li>
+                <li><a href="#skills" id="nav-skills">Skills Matrix</a></li>
+                <li><a href="#projects" id="nav-projects">Projects Case Studies</a></li>
+                <li><a href="#testimonials" id="nav-testimonials-link">Testimonials</a></li>
+                <li><a href="#estimator" id="nav-estimator">Cost Estimator</a></li>
+                <li><a href="#contact" class="btn-hire" id="nav-hire">Hire Me</a></li>
+            </ul>
+
+            <!-- Right side group for desktop and mobile -->
+            <div class="nav-right-group">
+                <button class="lang-switch" id="langBtn" onclick="toggleLanguage()"><i class="fa-solid fa-globe"></i> <span>EN / $ USD</span></button>
+                <div class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></div>
+        <ul class="drawer-links">
+            <li><a href="#about" onclick="closeDrawer()" id="m-nav-about">About</a></li>
+            <li><a href="#skills" onclick="closeDrawer()" id="m-nav-skills">Skills Matrix</a></li>
+            <li><a href="#projects" onclick="closeDrawer()" id="m-nav-projects">Projects Case Studies</a></li>
+            <li><a href="#testimonials" onclick="closeDrawer()" id="m-nav-testimonials">Testimonials</a></li>
+            <li><a href="#estimator" onclick="closeDrawer()" id="m-nav-estimator">Cost Estimator</a></li>
+            <li><a href="#contact" onclick="closeDrawer()" style="color: var(--primary);" id="m-nav-hire">Hire Me</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="container hero-grid">
+            <div>
+                <div class="status-badge">
+                    <span class="pulse-dot"></span> <span id="hero-badge">Available for Enterprise & Freelance Contracts</span>
+                </div>
+                <h1 class="hero-title" id="hero-title">Architecting <span class="gradient-text">High-Converting</span> E-Commerce Applications.</h1>
+                <p class="hero-desc" id="hero-desc">Full-Stack Web Developer specializing in custom online stores, dynamic payment gateway integrations (bKash), responsive UI/UX design, and persistent server API architecture.</p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary" id="btn-explore"><i class="fa-solid fa-rocket"></i> Explore Projects</a>
+                    <a href="#estimator" class="btn btn-glass" id="btn-estimate"><i class="fa-solid fa-calculator"></i> Estimate Project</a>
+                </div>
+            </div>
+
+            <!-- Terminal Widget -->
+            <div class="terminal-card">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <span class="terminal-title">ecommerce-engine.js — Node.js</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="code-line"><span class="code-keyword">const</span> cart = [<span class="code-string">"TrendyNest Premium Watch"</span>];</div>
+                    <div class="code-line"><span class="code-keyword">const</span> gateway = <span class="code-string">"bKash Merchant API"</span>;</div>
+                    <div class="code-line"><span class="code-keyword">async function</span> <span class="code-func">checkout</span>() {</div>
+                    <div class="code-line">&nbsp;&nbsp;<span class="code-keyword">const</span> order = <span class="code-keyword">await</span> processPayment({ cart, gateway });</div>
+                    <div class="code-line">&nbsp;&nbsp;<span class="code-keyword">return</span> order.generateReceipt();</div>
+                    <div class="code-line">}</div>
+                    <button class="btn btn-glass" style="margin-top: 1rem; width: 100%; font-size: 0.85rem;" onclick="runTerminalDemo()">
+                        <i class="fa-solid fa-play"></i> <span id="btn-terminal">Execute Order Simulation</span>
+                    </button>
+                    <div class="terminal-output" id="terminalOutput">
+                        > Click above to simulate backend e-commerce payment flow...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle" id="skills-sub">Technical Proficiency</div>
+                <h2 class="section-title" id="skills-title">Mastered Technologies & Frameworks</h2>
+            </div>
+
+            <div class="skills-filter">
+                <button class="filter-btn active" onclick="filterSkills('all')">All Skills</button>
+                <button class="filter-btn" onclick="filterSkills('frontend')">Frontend</button>
+                <button class="filter-btn" onclick="filterSkills('backend')">Backend & Payment</button>
+            </div>
+
+            <div class="skills-grid" id="skillsGrid">
+                <div class="glass-card skill-card" data-category="frontend">
+                    <div class="skill-header">
+                        <i class="fa-brands fa-html5 skill-icon"></i>
+                        <span style="font-weight: 700;">95%</span>
+                    </div>
+                    <h3>HTML5 & CSS3 Architecture</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Responsive Flexbox, CSS Grid layouts, and custom animations.</p>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 95%;"></div></div>
+                </div>
+
+                <div class="glass-card skill-card" data-category="frontend">
+                    <div class="skill-header">
+                        <i class="fa-brands fa-square-js skill-icon" style="color: #f7df1e;"></i>
+                        <span style="font-weight: 700;">90%</span>
+                    </div>
+                    <h3>JavaScript (ES6+) & DOM</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Async/Await, dynamic local carts, and interactive web APIs.</p>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 90%;"></div></div>
+                </div>
+
+                <div class="glass-card skill-card" data-category="backend">
+                    <div class="skill-header">
+                        <i class="fa-brands fa-node-js skill-icon" style="color: #22c55e;"></i>
+                        <span style="font-weight: 700;">85%</span>
+                    </div>
+                    <h3>Node.js Backend & APIs</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">RESTful server endpoints and continuous production setups.</p>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 85%;"></div></div>
+                </div>
+
+                <div class="glass-card skill-card" data-category="backend">
+                    <div class="skill-header">
+                        <i class="fa-solid fa-credit-card skill-icon" style="color: var(--bkash-color);"></i>
+                        <span style="font-weight: 700;">92%</span>
+                    </div>
+                    <h3>bKash Merchant Payment Integration</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Automated payment verifications, tokenizations, and webhooks.</p>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 92%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle" id="projects-sub">Portfolio Showcase</div>
+                <h2 class="section-title" id="projects-title">Production-Ready Applications</h2>
+            </div>
+
+            <div class="projects-grid">
+                <div class="glass-card project-card" style="border-color: var(--border-highlight);">
+                    <div class="project-badge-top">bKash Integrated</div>
+                    <div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.8rem;">TrendyNest</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;" id="project-desc">Full-scale dynamic e-commerce web application featuring live product catalog, local shopping cart, admin control panel, order tracking system, downloadable receipts, and bKash payment gateway.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML5/CSS3</span>
+                            <span class="tag">JavaScript ES6</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Admin Panel</span>
+                            <span class="tag">bKash API</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="openCaseStudyModal()"><i class="fa-solid fa-circle-info"></i> <span id="btn-case">Case Study</span></button>
+                        <a href="https://trendynest-s2nx.vercel.app" target="_blank" class="btn btn-glass" style="text-decoration: none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle" id="testi-sub">Client Feedback</div>
+                <h2 class="section-title" id="testi-title">Trusted by Global Clients</h2>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Review Card 1 -->
+                <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="color: #fbbf24; margin-bottom: 1rem; font-size: 1.1rem;">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 1.5rem;" id="testi-1">
+                            "Working with this developer on our e-commerce store was an absolute pleasure. The bKash payment integration and admin panel were executed flawlessly. Highly recommended!"
+                        </p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--border-glass); padding-top: 1rem;">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff;">
+                            J
+                        </div>
+                        <div>
+                            <h4 style="font-size: 1rem; color: var(--text-main);">John D.</h4>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);" id="testi-sub-1">E-Commerce Store Owner (Fiverr Client)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="color: #fbbf24; margin-bottom: 1rem; font-size: 1.1rem;">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 1.5rem;" id="testi-2">
+                            "Extremely professional and fast delivery! Built a custom full-stack web app with clean code and amazing responsiveness. Will definitely hire again."
+                        </p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--border-glass); padding-top: 1rem;">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--secondary), var(--accent-pink)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff;">
+                            S
+                        </div>
+                        <div>
+                            <h4 style="font-size: 1rem; color: var(--text-main);">Sarah M.</h4>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);" id="testi-sub-2">Startup Founder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Cost Estimator Section -->
+    <section class="section" id="estimator">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle" id="calc-sub">Interactive Budgeting</div>
+                <h2 class="section-title" id="calc-title">Instant Project Scope & Cost Estimator</h2>
+            </div>
+
+            <div class="calculator-box">
+                <div class="calc-options">
+                    <div class="calc-group">
+                        <label id="lbl-type">Select Project Type:</label>
+                        <select class="calc-select" id="calcType" onchange="calculateProjectPrice()">
+                            <option value="150" id="opt-1">Custom E-Commerce Application ($150)</option>
+                            <option value="80" id="opt-2">Business Portfolio Website ($80)</option>
+                            <option value="250" id="opt-3">Full-Stack Custom Web Platform ($250)</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-group">
+                        <label id="lbl-features">Additional Features & Integrations:</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+                            <label style="font-weight: 400;"><input type="checkbox" id="addBkash" value="50" onchange="calculateProjectPrice()" checked> <span id="chk-bkash">bKash Payment Gateway Integration (+$50)</span></label>
+                            <label style="font-weight: 400;"><input type="checkbox" id="addAdmin" value="70" onchange="calculateProjectPrice()" checked> <span id="chk-admin">Admin Control Dashboard (+$70)</span></label>
+                            <label style="font-weight: 400;"><input type="checkbox" id="addSpeed" value="30" onchange="calculateProjectPrice()" checked> <span id="chk-speed">Speed & SEO Optimization (+$30)</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-display">
+                    <span style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase;" id="lbl-estimate">Estimated Project Investment</span>
+                    <div class="price-tag" id="totalPrice">$300</div>
+                    <span style="color: var(--accent-green); font-weight: 600;" id="deliveryTime"><i class="fa-solid fa-clock"></i> Estimated Delivery: 5–7 Days</span>
+                    <a href="#contact" class="btn btn-primary" style="margin-top: 1.5rem;" id="btn-order"><i class="fa-solid fa-paper-plane"></i> Order This Package</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container" style="max-width: 800px;">
+            <div class="glass-card" style="text-align: center;">
+                <h2 class="section-title" style="margin-bottom: 1rem;" id="contact-title">Let's Build Your Next Web Project</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;" id="contact-desc">Available for client orders, Fiverr custom gigs, and full-stack development inquiries.</p>
+                
+                <form action="https://formspree.io/f/mjyygbpv" method="POST">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" name="name" placeholder="Your Name" required style="padding: 0.9rem; background: rgba(10,14,26,0.8); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; width: 100%;">
+                        <input type="email" name="email" placeholder="Your Email" required style="padding: 0.9rem; background: rgba(10,14,26,0.8); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; width: 100%;">
+                    </div>
+                    <textarea name="message" rows="5" placeholder="Project Details or Requirements..." required style="width: 100%; padding: 0.9rem; background: rgba(10,14,26,0.8); border: 1px solid var(--border-glass); border-radius: 8px; color: #fff; margin-bottom: 1.5rem;"></textarea>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;" id="btn-send"><i class="fa-solid fa-paper-plane"></i> Send Direct Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Social Profiles Section (Ekebare Niche) -->
+    <footer class="footer">
+        <div class="container">
+            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-muted);" id="social-title">Connect With Me</h3>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                <a href="https://www.linkedin.com/in/mahin-undefined-762215445?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="btn btn-glass" style="color: #0a66c2; border-color: rgba(10, 102, 194, 0.4); font-size: 0.85rem; padding: 0.5rem 1.2rem;">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://www.fiverr.com/mahin_rahman90b/buying?source=avatar_menu_profile" target="_blank" class="btn btn-glass" style="color: #1dbf73; border-color: rgba(29, 191, 115, 0.4); font-size: 0.85rem; padding: 0.5rem 1.2rem;">
+                    <i class="fa-solid fa-briefcase"></i> Fiverr
+                </a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 Full-Stack E-Commerce Architect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for TrendyNest Case Study -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-container">
+            <div class="modal-close" onclick="closeCaseStudyModal()"><i class="fa-solid fa-xmark"></i></div>
+            <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff;" id="modal-title">TrendyNest — Case Study</h2>
+            <span style="color: var(--primary); font-weight: 700; font-size: 0.9rem;" id="modal-sub">Full-Stack E-Commerce & bKash Integration Showcase</span>
+            
+            <p style="color: var(--text-muted); margin: 1.5rem 0; line-height: 1.7;" id="modal-desc">This application was designed to provide a seamless e-commerce experience tailored for modern buyers. Features include dynamic local carts, an intuitive admin control panel, instant order receipt downloads, and bKash payment verification.</p>
+
+            <div style="background: rgba(18, 24, 43, 0.9); border: 1px solid var(--bkash-color); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(226, 19, 110, 0.15);">
+                <h4 style="color: var(--bkash-color); display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-shield-halved"></i> <span id="modal-box-title">Integrated bKash Payment & Admin Panel</span></h4>
+                <p style="color: #cbd5e1; font-size: 0.9rem; margin-top: 0.5rem; line-height: 1.6;" id="modal-box-desc">Includes merchant checkout flow, PIN verifications, automated invoice generation, order tracking, and full admin management controls.</p>
+            </div>
+
+            <button class="btn btn-glass" onclick="closeCaseStudyModal()" id="modal-close-btn">Close Case Study</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Functions & Dual Language/Currency Engine -->
+    <script>
+        let currentLang = 'en';
+        const usdToBdtRate = 120;
+
+        const translations = {
+            en: {
+                btnLang: '<i class="fa-solid fa-globe"></i> EN / $ USD',
+                navAbout: 'About',
+                navSkills: 'Skills Matrix',
+                navProjects: 'Projects Case Studies',
+                navTestimonials: 'Testimonials',
+                navEstimator: 'Cost Estimator',
+                navHire: 'Hire Me',
+                heroBadge: 'Available for Enterprise & Freelance Contracts',
+                heroTitle: 'Architecting <span class="gradient-text">High-Converting</span> E-Commerce Applications.',
+                heroDesc: 'Full-Stack Web Developer specializing in custom online stores, dynamic payment gateway integrations (bKash), responsive UI/UX design, and persistent server API architecture.',
+                btnExplore: '<i class="fa-solid fa-rocket"></i> Explore Projects',
+                btnEstimate: '<i class="fa-solid fa-calculator"></i> Estimate Project',
+                btnTerminal: 'Execute Order Simulation',
+                skillsSub: 'Technical Proficiency',
+                skillsTitle: 'Mastered Technologies & Frameworks',
+                projectsSub: 'Portfolio Showcase',
+                projectsTitle: 'Production-Ready Applications',
+                projectDesc: 'Full-scale dynamic e-commerce web application featuring live product catalog, local shopping cart, admin control panel, order tracking system, downloadable receipts, and bKash payment gateway.',
+                btnCase: 'Case Study',
+                testiSub: 'Client Feedback',
+                testiTitle: 'Trusted by Global Clients',
+                testi1: '"Working with this developer on our e-commerce store was an absolute pleasure. The bKash payment integration and admin panel were executed flawlessly. Highly recommended!"',
+                testiSub1: 'E-Commerce Store Owner (Fiverr Client)',
+                testi2: '"Extremely professional and fast delivery! Built a custom full-stack web app with clean code and amazing responsiveness. Will definitely hire again."',
+                testiSub2: 'Startup Founder',
+                calcSub: 'Interactive Budgeting',
+                calcTitle: 'Instant Project Scope & Cost Estimator',
+                lblType: 'Select Project Type:',
+                opt1: 'Custom E-Commerce Application ($150)',
+                opt2: 'Business Portfolio Website ($80)',
+                opt3: 'Full-Stack Custom Web Platform ($250)',
+                lblFeatures: 'Additional Features & Integrations:',
+                chkBkash: 'bKash Payment Gateway Integration (+$50)',
+                chkAdmin: 'Admin Control Dashboard (+$70)',
+                chkSpeed: 'Speed & SEO Optimization (+$30)',
+                lblEstimate: 'Estimated Project Investment',
+                deliveryTime: '<i class="fa-solid fa-clock"></i> Estimated Delivery: 5–7 Days',
+                btnOrder: '<i class="fa-solid fa-paper-plane"></i> Order This Package',
+                socialTitle: 'Connect With Me',
+                contactTitle: "Let's Build Your Next Web Project",
+                contactDesc: 'Available for client orders, Fiverr custom gigs, and full-stack development inquiries.',
+                btnSend: '<i class="fa-solid fa-paper-plane"></i> Send Direct Message',
+                modalTitle: 'TrendyNest — Case Study',
+                modalSub: 'Full-Stack E-Commerce & bKash Integration Showcase',
+                modalDesc: 'This application was designed to provide a seamless e-commerce experience tailored for modern buyers. Features include dynamic local carts, an intuitive admin control panel, instant order receipt downloads, and bKash payment verification.',
+                modalBoxTitle: 'Integrated bKash Payment & Admin Panel',
+                modalBoxDesc: 'Includes merchant checkout flow, PIN verifications, automated invoice generation, order tracking, and full admin management controls.',
+                modalCloseBtn: 'Close Case Study'
+            },
+            bn: {
+                btnLang: '<i class="fa-solid fa-globe"></i> BN / ৳ BDT',
+                navAbout: 'সম্পর্কে',
+                navSkills: 'দক্ষতা ও টেকনোলজি',
+                navProjects: 'প্রজেক্ট সমূহ',
+                navTestimonials: 'ক্লায়েন্ট রিভিউ',
+                navEstimator: 'বাজেট ক্যালকুলেটর',
+                navHire: 'হায়ার করুন',
+                heroBadge: 'নতুন প্রজেক্ট ও ফ্রিল্যান্স কাজের জন্য প্রস্তুত',
+                heroTitle: '<span class="gradient-text">উচ্চমানের ই-কমার্স</span> অ্যাপ্লিকেশন তৈরির বিশেষজ্ঞ।',
+                heroDesc: 'ফুল-স্ট্যাক ওয়েব ডেভেলপার — কাস্টম অনলাইন স্টোর, বিকাশ (bKash) পেমেন্ট গেটওয়ে, রেসপনসিভ ডিজাইন এবং ডায়নামিক সার্ভার আর্কিটেকচার তৈরিতে দক্ষ।',
+                btnExplore: '<i class="fa-solid fa-rocket"></i> প্রজেক্টগুলো দেখুন',
+                btnEstimate: '<i class="fa-solid fa-calculator"></i> বাজেট হিসেব করুন',
+                btnTerminal: 'অর্ডার সিমুলেশন রান করুন',
+                skillsSub: 'কারিগরি দক্ষতা',
+                skillsTitle: 'ব্যবহৃত টেকনোলজি ও ফ্রেমওয়ার্ক',
+                projectsSub: 'পোর্টফোলিও শকেস',
+                projectsTitle: 'লাইভ প্রজেক্টসমূহ',
+                projectDesc: 'সম্পূর্ণ ডায়নামিক ই-কমার্স ওয়েবসাইট যেখানে রয়েছে লাইভ প্রোডাক্ট ক্যাটালগ, লোকাল কার্ট, অ্যাডমিন কন্ট্রোল প্যানেল, অর্ডার ট্র্যাকিং, রসিদ ডাউনলোড এবং বিকাশ পেমেন্ট সিস্টেম।',
+                btnCase: 'কেস স্টাডি',
+                testiSub: 'ক্লায়েন্ট ফিডব্যাক',
+                testiTitle: 'বিশ্বব্যাপী ক্লায়েন্টদের আস্থা',
+                testi1: '"আমাদের ই-কমার্স স্টোর তৈরিতে এই ডেভেলপারের সাথে কাজ করা অত্যন্ত আনন্দের ছিল। বিকাশ পেমেন্ট ইন্টিগ্রেশন এবং অ্যাডমিন প্যানেল নিখুঁতভাবে তৈরি করা হয়েছে। অত্যন্ত সুপারিশ করছি!"',
+                testiSub1: 'ই-কমার্স স্টোর মালিক (ফাইভার ক্লায়েন্ট)',
+                testi2: '"অত্যন্ত পেশাদার এবং দ্রুত ডেলিভারি! ক্লিন কোড এবং চমৎকার রেসপনসিভনেস সহ একটি কাস্টম ফুল-স্ট্যাক ওয়েব অ্যাপ তৈরি করে দিয়েছেন। ভবিষ্যতে অবশ্যই আবার কাজ করব।"',
+                testiSub2: 'স্টার্টআপ প্রতিষ্ঠাতা',
+                calcSub: 'ইন্টারঅ্যাক্টিভ বাজেট',
+                calcTitle: 'ইনস্ট্যান্ট প্রজেক্ট খরচ ও সময় ক্যালকুলেটর',
+                lblType: 'প্রজেক্টের ধরন নির্বাচন করুন:',
+                opt1: 'কাস্টম ই-কমার্স ওয়েবসাইট (৳ ১৮,০০০)',
+                opt2: 'বিজনেস পোর্টফোলিও ওয়েবসাইট (৳ ৯,৬০০)',
+                opt3: 'ফুল-স্ট্যাক কাস্টম ওয়েব প্ল্যাটফর্ম (৳ ৩০,০০০)',
+                lblFeatures: 'অতিরিক্ত ফিচার ও ইন্টিগ্রেশন:',
+                chkBkash: 'বিকাশ (bKash) মার্চেন্ট পেমেন্ট গেটওয়ে (+৳ ৬,০০০)',
+                chkAdmin: 'এডমিন কন্ট্রোল ড্যাশবোর্ড (+৳ ৮,৪০০)',
+                chkSpeed: 'স্পিড ও এসইও অপটিমাইজেশন (+৳ ৩,৬০০)',
+                lblEstimate: 'আনুমানিক প্রজেক্ট বাজেট',
+                deliveryTime: '<i class="fa-solid fa-clock"></i> ডেলিভারি সময়: ৫–৭ দিন',
+                btnOrder: '<i class="fa-solid fa-paper-plane"></i> এই প্যাকেজটি অর্ডার করুন',
+                socialTitle: 'আমার সোশ্যাল প্রোফাইলসমূহ',
+                contactTitle: 'আপনার পরবর্তী ওয়েব প্রজেক্ট শুরু করুন',
+                contactDesc: 'ডাইরেক্ট ক্লায়েন্ট অর্ডার, ফাইভার গিগ এবং নতুন প্রজেক্টের আলোচনার জন্য মেসেজ দিন।',
+                btnSend: '<i class="fa-solid fa-paper-plane"></i> সরাসরি মেসেজ পাঠান',
+                modalTitle: 'TrendyNest — কেস স্টাডি',
+                modalSub: 'ফুল-স্ট্যাক ই-কমার্স ও বিকাশ ইন্টিগ্রেশন শকেস',
+                modalDesc: 'এই অ্যাপ্লিকেশনটি আধুনিক ক্রেতাদের জন্য একটি চমৎকার ই-কমার্স অভিজ্ঞতা নিশ্চিত করতে তৈরি করা হয়েছে। এতে রয়েছে ডায়নামিক লোকাল কার্ট, সহজ অ্যাডমিন কন্ট্রোল প্যানেল, ইনস্ট্যান্ট অর্ডার রসিদ ডাউনলোড এবং বিকাশ পেমেন্ট ভেরিফিকেশন।',
+                modalBoxTitle: 'ইন্টিগ্রেটেড বিকাশ পেমেন্ট ও অ্যাডমিন প্যানেল',
+                modalBoxDesc: 'এতে রয়েছে মার্চেন্ট চেকআউট ফ্লো, পিন ভেরিফিকেশন, স্বয়ংক্রিয় ইনভয়েস জেনারেশন, অর্ডার ট্র্যাকিং এবং সম্পূর্ণ অ্যাডমিন ম্যানেজমেন্ট কন্ট্রোল।',
+                modalCloseBtn: 'কেস স্টাডি বন্ধ করুন'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'bn' : 'en';
+            const t = translations[currentLang];
+
+            document.getElementById('langBtn').innerHTML = t.btnLang;
+            document.getElementById('nav-about').innerText = t.navAbout;
+            document.getElementById('nav-skills').innerText = t.navSkills;
+            document.getElementById('nav-projects').innerText = t.navProjects;
+            document.getElementById('nav-testimonials-link').innerText = t.navTestimonials;
+            document.getElementById('nav-estimator').innerText = t.navEstimator;
+            document.getElementById('nav-hire').innerText = t.navHire;
+            
+            document.getElementById('m-nav-about').innerText = t.navAbout;
+            document.getElementById('m-nav-skills').innerText = t.navSkills;
+            document.getElementById('m-nav-projects').innerText = t.navProjects;
+            document.getElementById('m-nav-testimonials').innerText = t.navTestimonials;
+            document.getElementById('m-nav-estimator').innerText = t.navEstimator;
+            document.getElementById('m-nav-hire').innerText = t.navHire;
+
+            document.getElementById('hero-badge').innerText = t.heroBadge;
+            document.getElementById('hero-title').innerHTML = t.heroTitle;
+            document.getElementById('hero-desc').innerText = t.heroDesc;
+            document.getElementById('btn-explore').innerHTML = t.btnExplore;
+            document.getElementById('btn-estimate').innerHTML = t.btnEstimate;
+            document.getElementById('btn-terminal').innerText = t.btnTerminal;
+            document.getElementById('skills-sub').innerText = t.skillsSub;
+            document.getElementById('skills-title').innerText = t.skillsTitle;
+            document.getElementById('projects-sub').innerText = t.projectsSub;
+            document.getElementById('projects-title').innerText = t.projectsTitle;
+            document.getElementById('project-desc').innerText = t.projectDesc;
+            document.getElementById('btn-case').innerText = t.btnCase;
+            
+            document.getElementById('testi-sub').innerText = t.testiSub;
+            document.getElementById('testi-title').innerText = t.testiTitle;
+            document.getElementById('testi-1').innerText = t.testi1;
+            document.getElementById('testi-sub-1').innerText = t.testiSub1;
+            document.getElementById('testi-2').innerText = t.testi2;
+            document.getElementById('testi-sub-2').innerText = t.testiSub2;
+
+            document.getElementById('calc-sub').innerText = t.calcSub;
+            document.getElementById('calc-title').innerText = t.calcTitle;
+            document.getElementById('lbl-type').innerText = t.lblType;
+            document.getElementById('opt-1').innerText = t.opt1;
+            document.getElementById('opt-2').innerText = t.opt2;
+            document.getElementById('opt-3').innerText = t.opt3;
+            document.getElementById('lbl-features').innerText = t.lblFeatures;
+            document.getElementById('chk-bkash').innerText = t.chkBkash;
+            document.getElementById('chk-admin').innerText = t.chkAdmin;
+            document.getElementById('chk-speed').innerText = t.chkSpeed;
+            document.getElementById('lbl-estimate').innerText = t.lblEstimate;
+            document.getElementById('deliveryTime').innerHTML = t.deliveryTime;
+            document.getElementById('btn-order').innerHTML = t.btnOrder;
+            
+            document.getElementById('social-title').innerText = t.socialTitle;
+            document.getElementById('contact-title').innerText = t.contactTitle;
+            document.getElementById('contact-desc').innerText = t.contactDesc;
+            document.getElementById('btn-send').innerHTML = t.btnSend;
+            
+            document.getElementById('modal-title').innerText = t.modalTitle;
+            document.getElementById('modal-sub').innerText = t.modalSub;
+            document.getElementById('modal-desc').innerText = t.modalDesc;
+            document.getElementById('modal-box-title').innerText = t.modalBoxTitle;
+            document.getElementById('modal-box-desc').innerText = t.modalBoxDesc;
+            document.getElementById('modal-close-btn').innerText = t.modalCloseBtn;
+
+            calculateProjectPrice();
+        }
+
+        function calculateProjectPrice() {
+            const basePrice = parseInt(document.getElementById('calcType').value);
+            const bkash = document.getElementById('addBkash').checked ? parseInt(document.getElementById('addBkash').value) : 0;
+            const admin = document.getElementById('addAdmin').checked ? parseInt(document.getElementById('addAdmin').value) : 0;
+            const speed = document.getElementById('addSpeed').checked ? parseInt(document.getElementById('addSpeed').value) : 0;
+
+            const totalUSD = basePrice + bkash + admin + speed;
+
+            if (currentLang === 'en') {
+                document.getElementById('totalPrice').innerText = '$' + totalUSD;
+            } else {
+                const totalBDT = totalUSD * usdToBdtRate;
+                document.getElementById('totalPrice').innerText = '৳ ' + totalBDT.toLocaleString('bn-BD');
+            }
+        }
+
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const drawerClose = document.getElementById('drawerClose');
+
+        mobileToggle.addEventListener('click', () => mobileDrawer.classList.add('active'));
+        drawerClose.addEventListener('click', () => mobileDrawer.classList.remove('active'));
+        function closeDrawer() { mobileDrawer.classList.remove('active'); }
+
+        function runTerminalDemo() {
+            const output = document.getElementById('terminalOutput');
+            output.innerHTML = '> Processing order request...<br>';
+            setTimeout(() => {
+                output.innerHTML += '> Connecting to bKash Merchant Gateway API... [OK]<br>';
+            }, 600);
+            setTimeout(() => {
+                output.innerHTML += '> Payment Verified! Generating Downloadable Order Receipt...<br>';
+            }, 1200);
+            setTimeout(() => {
+                output.innerHTML += '<span style="color: var(--accent-green);">✔ Order #TrendyNest-2026 Success!</span>';
+            }, 1800);
+        }
+
+        function filterSkills(category) {
+            const cards = document.querySelectorAll('.skill-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openCaseStudyModal() { document.getElementById('modalOverlay').style.display = 'flex'; }
+        function closeCaseStudyModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+    </script>
+</body>
+</html>
